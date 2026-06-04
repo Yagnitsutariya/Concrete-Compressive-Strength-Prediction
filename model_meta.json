@@ -1,0 +1,61 @@
+{
+    "metrics": {
+        "r2_score": 0.9200613461572931,
+        "mae_mpa": 3.4294679270315096,
+        "rmse_mpa": 4.8834096781769
+    },
+    "features": [
+        "cement",
+        "slag",
+        "ash",
+        "water",
+        "superplastic",
+        "coarseagg",
+        "fineagg",
+        "age",
+        "Total_Binder",
+        "Water_Cement_Ratio"
+    ],
+    "feature_importances": [
+        {
+            "name": "age",
+            "importance": 0.3575835647225496
+        },
+        {
+            "name": "Total_Binder",
+            "importance": 0.33166941321283827
+        },
+        {
+            "name": "Water_Cement_Ratio",
+            "importance": 0.15940380595073514
+        },
+        {
+            "name": "water",
+            "importance": 0.0315111898208458
+        },
+        {
+            "name": "cement",
+            "importance": 0.028481553491419957
+        },
+        {
+            "name": "superplastic",
+            "importance": 0.025762638632616398
+        },
+        {
+            "name": "slag",
+            "importance": 0.020632377913847377
+        },
+        {
+            "name": "fineagg",
+            "importance": 0.019510111344581128
+        },
+        {
+            "name": "coarseagg",
+            "importance": 0.01355630309335614
+        },
+        {
+            "name": "ash",
+            "importance": 0.011889041817210202
+        }
+    ]
+}

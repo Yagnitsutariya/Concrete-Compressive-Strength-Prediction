@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concrete Compressive Strength Predictor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧱</text></svg>">
+</head>
+<body>
+    <div class="glass-bg"></div>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-logo">
+                <span class="logo-icon">🧱</span>
+                <h1>ConcreSight</h1>
+            </div>
+            <p class="subtitle">AI-Powered Compressive Strength Optimizer & Predictor</p>
+        </header>
+
+        <!-- Main Dashboard Grid -->
+        <main class="dashboard-grid">
+            
+            <!-- Left Panel: Ingredient Formulation Inputs -->
+            <section class="panel formulation-panel">
+                <div class="panel-header">
+                    <h2>1. Concrete Formulation (per m³)</h2>
+                    <p class="panel-desc">Adjust the ingredient ratios to design your concrete mix recipe.</p>
+                </div>
+                
+                <form id="predictor-form" class="form-grid">
+                    <!-- Category: Binders -->
+                    <div class="ingredient-group">
+                        <h3>Binders (Cementitious Materials)</h3>
+                        
+                        <!-- Cement -->
+                        <div class="input-control">
+                            <div class="input-label-row">
+                                <label for="cement">Cement <span class="unit">(kg/m³)</span></label>
+                                <input type="number" id="cement-val" min="102" max="540" step="1" value="280">
+                            </div>
+                            <input type="range" id="cement" min="102" max="540" step="1" value="280" class="slider">
+                            <div class="range-labels">
+                                <span>Min: 102</span>
+                                <span>Max: 540</span>
+                            </div>
+                        </div>
+
+                        <!-- Blast Furnace Slag -->
+                        <div class="input-control">
+                            <div class="input-label-row">
+                                <label for="slag">Blast Furnace Slag <span class="unit">(kg/m³)</span></label>
+                                <input type="number" id="slag-val" min="0" max="360" step="1" value="70">
+                            </div>
+                            <input type="range" id="slag" min="0" max="360" step="1" value="70" class="slider">
+                            <div class="range-labels">
+                                <span>Min: 0</span>
+                                <span>Max: 360</span>
+                            </div>
+                        </div>
+
+                        <!-- Fly Ash -->
+                        <div class="input-control">
+                            <div class="input-label-row">
+                                <label for="ash">Fly Ash <span class="unit">(kg/m³)</span></label>
+                                <input type="number" id="ash-val" min="0" max="200" step="1" value="50">
+                            </div>
+                            <input type="range" id="ash" min="0" max="200" step="1" value="50" class="slider">
+                            <div class="range-labels">
+                                <span>Min: 0</span>
+                                <span>Max: 200</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Category: Water & Additives -->
+                    <div class="ingredient-group">
+                        <h3>Water & Additives</h3>
+                        
+                        <!-- Water -->
+                        <div class="input-control">
+                            <div class="input-label-row">
+                                <label for="water">Water <span class="unit">(kg/m³)</span></label>
+                                <input type="number" id="water-val" min="120" max="250" step="1" value="180">
+                            </div>
+                            <input type="range" id="water" min="120" max="250" step="1" value="180" class="slider">
+                            <div class="range-labels">
+                                <span>Min: 120</span>
+                                <span>Max: 250</span>
+                            </div>
+                        </div>
+
+                        <!-- Superplasticizer -->
+                        <div class="input-control">
+                            <div class="input-label-row">
+                                <label for="superplastic">Superplasticizer <span class="unit">(kg/m³)</span></label>
+                                <input type="number" id="superplastic-val" min="0" max="32" step="0.1" value="6.0">
+                            </div>
+                            <input type="range" id="superplastic" min="0" max="32" step="0.1" value="6.0" class="slider">
+                            <div class="range-labels">
+                                <span>Min: 0</span>
+                                <span>Max: 32</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Category: Aggregates -->
+                    <div class="ingredient-group">
+                        <h3>Aggregates</h3>
+                        
+                        <!-- Coarse Aggregate -->
+                        <div class="input-control">
+                            <div class="input-label-row">
+                                <label for="coarseagg">Coarse Aggregate <span class="unit">(kg/m³)</span></label>
+                                <input type="number" id="coarseagg-val" min="800" max="1150" step="1" value="970">
+                            </div>
+                            <input type="range" id="coarseagg" min="800" max="1150" step="1" value="970" class="slider">
+                            <div class="range-labels">
+                                <span>Min: 800</span>
+                                <span>Max: 1150</span>
+                            </div>
+                        </div>
+
+                        <!-- Fine Aggregate -->
+                        <div class="input-control">
+                            <div class="input-label-row">
+                                <label for="fineagg">Fine Aggregate <span class="unit">(kg/m³)</span></label>
+                                <input type="number" id="fineagg-val" min="590" max="1000" step="1" value="770">
+                            </div>
+                            <input type="range" id="fineagg" min="590" max="1000" step="1" value="770" class="slider">
+                            <div class="range-labels">
+                                <span>Min: 590</span>
+                                <span>Max: 1000</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Category: Age -->
+                    <div class="ingredient-group">
+                        <h3>Curing time</h3>
+                        
+                        <!-- Age -->
+                        <div class="input-control">
+                            <div class="input-label-row">
+                                <label for="age">Age <span class="unit">(Days)</span></label>
+                                <input type="number" id="age-val" min="1" max="365" step="1" value="28">
+                            </div>
+                            <input type="range" id="age" min="1" max="365" step="1" value="28" class="slider">
+                            <div class="range-labels">
+                                <span>1 Day</span>
+                                <span>1 Year (365 Days)</span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Calculated Ratios Display -->
+                <div class="ratios-container">
+                    <div class="ratio-card">
+                        <span class="ratio-title">Total Binder</span>
+                        <span class="ratio-value" id="ratio-binder">400.0 <span class="ratio-unit">kg/m³</span></span>
+                        <span class="ratio-desc">Cement + Slag + Ash</span>
+                    </div>
+                    <div class="ratio-card">
+                        <span class="ratio-title">Water/Cement Ratio</span>
+                        <span class="ratio-value" id="ratio-wc">0.64</span>
+                        <span class="ratio-desc">Optimal range: 0.35 - 0.60</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Panel: Prediction Output & Model Insights -->
+            <div class="results-column">
+                
+                <!-- Output Dashboard Panel -->
+                <section class="panel output-panel">
+                    <div class="panel-header">
+                        <h2>2. Prediction Dashboard</h2>
+                    </div>
+
+                    <div class="output-content">
+                        <!-- Gauge Area -->
+                        <div class="gauge-wrapper">
+                            <svg class="strength-gauge" viewBox="0 0 120 120">
+                                <circle class="gauge-bg" cx="60" cy="60" r="50"></circle>
+                                <circle class="gauge-fill" id="gauge-arc" cx="60" cy="60" r="50"></circle>
+                            </svg>
+                            <div class="gauge-labels-center">
+                                <span class="gauge-value" id="strength-display">---</span>
+                                <span class="gauge-unit">MPa</span>
+                            </div>
+                        </div>
+
+                        <!-- Classification details -->
+                        <div class="class-card">
+                            <span class="class-label">Concrete Suitability</span>
+                            <h3 class="class-title" id="class-title">Awaiting Inputs...</h3>
+                            <p class="class-desc" id="class-desc">Adjust formulation parameters to compute concrete compressive strength and receive analysis.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="action-row">
+                        <button type="button" id="log-prediction-btn" class="btn btn-primary" disabled>Log Formulation</button>
+                    </div>
+                </section>
+
+                <!-- Model Insights and feature importances -->
+                <section class="panel insights-panel">
+                    <div class="panel-header">
+                        <h2>Model Insights</h2>
+                        <span class="badge">Accuracy: 92.0% (R²)</span>
+                    </div>
+                    
+                    <div class="insights-tabs">
+                        <button class="tab-btn active" data-tab="importances">Feature Importance</button>
+                        <button class="tab-btn" data-tab="metrics">Model Stats</button>
+                    </div>
+
+                    <div class="tab-content" id="tab-importances">
+                        <p class="tab-info">Variables that influence the concrete's target compressive strength the most (Random Forest feature importances):</p>
+                        <div class="importance-list" id="importance-list">
+                            <!-- Populated dynamically via JS -->
+                        </div>
+                    </div>
+
+                    <div class="tab-content hidden" id="tab-metrics">
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <span class="metric-val" id="metric-r2">0.9201</span>
+                                <span class="metric-lbl">R² Score</span>
+                            </div>
+                            <div class="metric-card">
+                                <span class="metric-val" id="metric-mae">3.43 MPa</span>
+                                <span class="metric-lbl">Mean Absolute Error (MAE)</span>
+                            </div>
+                            <div class="metric-card">
+                                <span class="metric-val" id="metric-rmse">4.88 MPa</span>
+                                <span class="metric-lbl">Root Mean Square Error (RMSE)</span>
+                            </div>
+                        </div>
+                        <p class="metric-desc">Trained on 1,005 concrete mix samples. Out-of-sample prediction error is approximately 3.4 MPa, making it highly robust for commercial formulation design.</p>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Prediction History Logs -->
+        <section class="panel history-panel">
+            <div class="panel-header">
+                <h2>Recipe Comparison History</h2>
+                <button type="button" id="clear-history-btn" class="btn btn-secondary btn-sm">Clear History</button>
+            </div>
+            
+            <div class="table-container">
+                <table class="history-table" id="history-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Cement</th>
+                            <th>Slag</th>
+                            <th>Ash</th>
+                            <th>Water</th>
+                            <th>Superplast.</th>
+                            <th>Coarse Agg.</th>
+                            <th>Fine Agg.</th>
+                            <th>Age</th>
+                            <th>W/C Ratio</th>
+                            <th>Total Binder</th>
+                            <th>Strength</th>
+                            <th>Suitability</th>
+                        </tr>
+                    </thead>
+                    <tbody id="history-body">
+                        <tr class="empty-row">
+                            <td colspan="13">No formulations logged yet. Predict and click "Log Formulation" to compare models.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+    
+    <script src="/static/app.js"></script>
+</body>
+</html>
